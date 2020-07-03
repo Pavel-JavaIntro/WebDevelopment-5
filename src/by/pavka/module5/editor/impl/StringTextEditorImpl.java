@@ -55,7 +55,7 @@ public class StringTextEditorImpl implements TextEditor {
 
   @Override
   public void replaceCharacter(int index, char replacement) {
-    if (text != null) {
+    if (text != null && index >= 0) {
       String[] words = normalizeText(text).split(" ");
       for (String target : words) {
         if (target.length() > index) {
@@ -91,7 +91,7 @@ public class StringTextEditorImpl implements TextEditor {
 
   @Override
   public void replaceWord(int length, String word) {
-    if (text != null) {
+    if (text != null && word !=null) {
       String[] words = normalizeText(text).split(" ");
       for (String target : words) {
         if (target.length() == length) {
@@ -113,7 +113,7 @@ public class StringTextEditorImpl implements TextEditor {
       if (isProcessStuckPunct()) {
         output = output.replaceAll(STUCK_DELIMITER, " ");
       }
-      output = output.replaceAll("\\s+", " ");
+      output = output.replaceAll("\\s+", " ").trim();
     }
     return output;
   }
