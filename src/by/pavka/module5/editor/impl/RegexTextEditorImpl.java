@@ -39,7 +39,9 @@ public class RegexTextEditorImpl implements TextEditor {
 
   @Override
   public void loadText() {
-    text = textLoader.loadText();
+    if (textLoader != null) {
+      text = textLoader.loadText();
+    }
   }
 
   @Override
