@@ -41,7 +41,7 @@ public class CharacterTextEditorImpl implements TextEditor {
 
   @Override
   public void replaceCharacter(int index, char replacement) {
-    if (text != null) {
+    if (text != null && index>= 0) {
       char[] textChars = text.toCharArray();
       int wordIndex = -1;
       for (int i = 0; i < textChars.length; i++) {
@@ -81,7 +81,7 @@ public class CharacterTextEditorImpl implements TextEditor {
 
   @Override
   public void replaceWord(int length, String word) {
-    if (text != null) {
+    if (text != null && word != null && length > 0) {
       char[] textChars = text.toCharArray();
       char[] wordChars = word.toCharArray();
       Deque<Character> letters = new ArrayDeque<>();
@@ -95,7 +95,6 @@ public class CharacterTextEditorImpl implements TextEditor {
           letters.addLast(c);
         } else {
           if (wordLength == length) {
-            System.out.println(letters.stream().map(String::valueOf).collect(Collectors.joining()));
             for (int j = 0; j < length; j++) {
               letters.pollLast();
             }
@@ -118,7 +117,7 @@ public class CharacterTextEditorImpl implements TextEditor {
 
   @Override
   public void removeConsonantWords(int length) {
-    if (text != null) {
+    if (text != null && length > 0) {
       char[] textChars = text.toCharArray();
       boolean startsWithConsonant = false;
       Deque<Character> letters = new ArrayDeque<>();
