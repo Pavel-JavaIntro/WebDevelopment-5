@@ -47,7 +47,7 @@ public class RegexTextEditorImpl implements TextEditor {
   @Override
   public void replaceCharacter(int index, char replacement) {
     List<String> words = collectWords(text);
-    if (words != null && !words.isEmpty()) {
+    if (words != null && !words.isEmpty() && index >= 0) {
       String replace = String.valueOf(replacement);
       String regex = String.format(REPLACER, index);
       replaceInText(words, regex, replace);
@@ -68,7 +68,7 @@ public class RegexTextEditorImpl implements TextEditor {
   @Override
   public void replaceWord(int length, String word) {
     List<String> words = collectWords(text);
-    if (words != null && !words.isEmpty()) {
+    if (words != null && !words.isEmpty() && length > 0) {
       String regex = "^.{" + length + "}$";
       replaceInText(words, regex, word);
     }
@@ -112,7 +112,7 @@ public class RegexTextEditorImpl implements TextEditor {
   @Override
   public void removeConsonantWords(int length) {
     List<String> words = collectWords(text);
-    if (words != null && !words.isEmpty()) {
+    if (words != null && !words.isEmpty() && length > 0) {
       String consonantWord = String.format(CONSONANTS, length - 1);
       replaceInText(words, consonantWord, "");
     }
